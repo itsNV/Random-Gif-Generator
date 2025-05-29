@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useGif from "../hooks/useGif";
+import Spinner from "./Spinner"; // Assuming you have a Spinner component
 
 const RandomGif = () => {
-  
-  const { gif,fetchData } = useGif();  
-  
-  
+  const { gif, loading, fetchData } = useGif();
 
   return (
-    <div className="border-black flex flex-col items-center bg-blue-700 w-[450px] h-auto mt-[4rem] rounded-[10px]">
-      <h2 className="mt-6 uppercase underline font-bold"> A Random Gif</h2>
+    <div className="flex flex-col items-center bg-gray-800 w-full lg:w-1/2 p-6 rounded-lg shadow-lg gap-4">
+      <h2 className="text-2xl uppercase underline font-semibold text-center">A Random GIF</h2>
 
-      <div className="mt-[1rem]">
-        <img src={gif} width={250} height={200} />
+      <div className="w-full h-64 flex items-center justify-center bg-gray-700 rounded-md overflow-hidden">
+        {loading ? (
+          <Spinner />
+        ) : (
+          <img src={gif} alt="Random GIF" className="w-full h-full object-cover" />
+        )}
       </div>
 
-      
       <button
         onClick={() => fetchData()}
-        className="mt-5 mb-5 border-black rounded-lg bg-black w-[70%] text-slate-300 hover:text-white"
+        className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md transition-colors duration-200 ease-in-out transform hover:scale-105 active:scale-95"
       >
         Generate
       </button>
